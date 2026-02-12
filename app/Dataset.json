@@ -1,0 +1,152 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "difficulty": "Very Easy",
+      "title": "Sum of Two Numbers",
+      "description": "Given an array of integers `nums` and an integer `target`, return indices of the two numbers such that they add up to `target`.You may assume that each input would have exactly one solution, and you may not use the same element twice.You can return the answer in any order.Only one valid answer exists.",
+      "reference_solution": "#include <iostream>\nusing namespace std;\nint main() {\n  int a, b;\n  cin >> a >> b;\n  cout << a + b << endl;\n  return 0;\n}",
+      "rubric": [
+        {"criterion": "Compiles without errors", "points": 20},
+        {"criterion": "Correct sum calculation for standard inputs", "points": 40},
+        {"criterion": "Handles edge cases correctly", "points": 20},
+        {"criterion": "Proper input/output handling", "points": 10},
+        {"criterion": "Code readability/style", "points": 10}
+      ],
+      "student_submissions": [
+        {
+          "code": "#include <iostream>\nusing namespace std;\nint main(){\n    int a,b;\n    cin>>a>>b;\n    cout<<a+b<<endl;\n    return 0;\n}",
+          "human_score": 100
+        },
+        {
+          "code": "#include <iostream>\nusing namespace std;\nint main(){int x,y;cin>>x>>y;cout<<x-y<<endl;return 0;}",
+          "human_score": 50
+        },
+        {
+          "code": "#include <iostream>\nint main(){return 0;}",
+          "human_score": 20
+        }
+      ]
+    },
+    
+    {
+      "id": 2,
+      "difficulty": "Easy",
+      "title": "Longest Uncommon Subsequence",
+      "description": "Given two strings `a` and `b`, find the length of the longest uncommon subsequence between them. An uncommon subsequence between two strings is a string that is a subsequence of one but not the other.Return the length of the longest uncommon subsequence between `a` and `b`. If the longest uncommon subsequence doesn't exist, return `-1`.",
+      "reference_solution": "#include <iostream>\n#include <string>\nusing namespace std;\n\nint findLUSlength(string a, string b) {\n    if(a == b) return -1;\n    return max(a.length(), b.length());\n}\n\nint main() {\n    string a, b;\n    cin >> a >> b;\n    cout << findLUSlength(a, b) << endl;\n    return 0;\n}",
+      "rubric": [
+        {"criterion": "Compiles without errors", "points": 16},
+        {"criterion": "Correct logic for checking if strings are equal", "points": 25},
+        {"criterion": "Correct calculation of longest uncommon subsequence length", "points": 42},
+        {"criterion": "Proper input/output handling", "points": 17}
+      ],
+      "student_submissions": [
+        {
+          "code": "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n    string a, b;\n    cin >> a >> b;\n    if(a == b) cout << -1;\n    else cout << max(a.size(), b.size());\n    return 0;\n}",
+          "human_score": 100
+        },
+        {
+          "code": "#include <iostream>\n#include <string>\nusing namespace std;\nint main() {\n    string a, b;\n    cin >> a >> b;\n    cout << a.length() + b.length() << endl;\n    return 0;\n}",
+          "human_score": 33
+        },
+        {
+          "code": "#include <iostream>\nint main(){return 0;}",
+          "human_score": 8
+        }
+      ]
+    },
+
+    {
+      "id": 3,
+      "difficulty": "Medium",
+      "title": "Corporate Flight Bookings",
+      "description": "There are `n` flights that are labeled from `1` to `n`.You are given an array of flight bookings `bookings`, where `bookings[i] = [firsti, lasti, seatsi]` represents a booking for flights `firsti` through `lasti` (inclusive) with `seatsi` seats reserved for each flight in the range.Return an array `answer` of length `n`, where `answer[i]` is the total number of seats reserved for flight `i`.",
+      "reference_solution": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nvector<int> corpFlightBookings(vector<vector<int>>& bookings, int n) {\n    vector<int> answer(n, 0);\n    vector<int> diff(n + 1, 0);\n    \n    for (auto &b : bookings) {\n        diff[b[0] - 1] += b[2];\n        if (b[1] < n) diff[b[1]] -= b[2];\n    }\n    \n    answer[0] = diff[0];\n    for (int i = 1; i < n; ++i) {\n        answer[i] = answer[i - 1] + diff[i];\n    }\n    return answer;\n}\n\nint main() {\n    int n, m;\n    cin >> n >> m;\n    vector<vector<int>> bookings(m, vector<int>(3));\n    for(int i = 0; i < m; ++i) {\n        cin >> bookings[i][0] >> bookings[i][1] >> bookings[i][2];\n    }\n    vector<int> res = corpFlightBookings(bookings, n);\n    for(int x : res) cout << x << ' ';\n    cout << endl;\n    return 0;\n}",
+      "rubric": [
+        {"criterion": "Compiles without errors", "points": 12},
+        {"criterion": "Correct handling of booking ranges", "points": 24},
+        {"criterion": "Correct final seat count per flight", "points": 35},
+        {"criterion": "Efficient solution using difference array or prefix sum", "points": 18},
+
+
+        
+        {"criterion": "Proper input/output handling", "points": 11}
+      ],
+      "student_submissions": [
+        {
+          "code": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main(){\n    int n, m;\n    cin >> n >> m;\n    vector<int> answer(n,0);\n    for(int i=0;i<m;i++){\n        int f,l,s;\n        cin >> f >> l >> s;\n        for(int j=f-1;j<l;j++) answer[j]+=s;\n    }\n    for(int x: answer) cout << x << ' ';\n    return 0;\n}",
+          "human_score": 100
+        },
+        {
+          "code": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main(){\n    int n, m;\n    cin >> n >> m;\n    vector<int> answer(n,0);\n    for(int i=0;i<m;i++){\n        int f,l,s;\n        cin >> f >> l >> s;\n        for(int j=f;j<=l;j++) answer[j]+=s;\n    }\n    for(int x: answer) cout << x << ' ';\n    return 0;\n}",
+          "human_score": 70
+        },
+        {
+          "code": "#include <iostream>\nusing namespace std;\nint main(){\n    int n,m;\n    cin>>n>>m;\n    for(int i=0;i<n;i++) cout<<0<<' ';\n    return 0;\n}",
+          "human_score": 20
+        }
+      ]
+    },
+
+    {
+      "id": 4,
+      "difficulty": "Hard",
+      "title": "Alien Dictionary",
+      "description": "There is a new alien language that uses the English alphabet. However, the order among the letters is unknown to you. You are given a list of strings `words` from the alien language's dictionary, where the strings in `words` are sorted lexicographically by the rules of this new language. Return a string of the unique letters in the new alien language sorted in lexicographically increasing order by the new language's rules. If there is no solution, return ``. If there are multiple solutions, return any of them. A string `s` is lexicographically smaller than a string `t` if at the first letter where they differ, the letter in `s` comes before the letter in `t` in the alien language. If the first `min(s.length, t.length)` letters are the same, then `s` is smaller if and only if `s.length < t.length`.",
+      "reference_solution": "#include <iostream>\n#include <vector>\n#include <unordered_map>\n#include <unordered_set>\n#include <queue>\n#include <string>\nusing namespace std;\n\nstring alienOrder(vector<string>& words) {\n    unordered_map<char, unordered_set<char>> adj;\n    unordered_map<char, int> indegree;\n    for (auto &word : words) for (char c : word) indegree[c] = 0;\n\n    for (int i = 0; i < words.size() - 1; ++i) {\n        string w1 = words[i], w2 = words[i+1];\n        int len = min(w1.size(), w2.size());\n        for (int j = 0; j < len; ++j) {\n            if (w1[j] != w2[j]) {\n                if (!adj[w1[j]].count(w2[j])) {\n                    adj[w1[j]].insert(w2[j]);\n                    indegree[w2[j]]++;\n                }\n                break;\n            }\n        }\n    }\n\n    queue<char> q;\n    for (auto &p : indegree) if (p.second == 0) q.push(p.first);\n    string order;\n    while (!q.empty()) {\n        char c = q.front(); q.pop();\n        order += c;\n        for (char nei : adj[c]) {\n            indegree[nei]--;\n            if (indegree[nei] == 0) q.push(nei);\n        }\n    }\n    if (order.size() != indegree.size()) return \"\";\n    return order;\n}\n\nint main() {\n    int n;\n    cin >> n;\n    vector<string> words(n);\n    for(int i=0;i<n;i++) cin >> words[i];\n    cout << alienOrder(words) << endl;\n    return 0;\n}",
+      "rubric": [
+        {"criterion": "Compiles without errors", "points": 12},
+        {"criterion": "Correct graph construction from words", "points": 25},
+        {"criterion": "Correct topological sorting to determine letter order", "points": 31},
+        {"criterion": "Handles invalid cases (cycles) correctly", "points": 19},
+        {"criterion": "Proper input/output handling", "points": 13}
+      ],
+      "student_submissions": [
+        {
+          "code": "#include <iostream>\n#include <vector>\n#include <unordered_map>\n#include <unordered_set>\n#include <queue>\n#include <string>\nusing namespace std;\n\nstring alienOrder(vector<string>& words){ /* full reference logic */ }\nint main(){\n    int n;\n    cin >> n;\n    vector<string> words(n);\n    for(int i=0;i<n;i++) cin>>words[i];\n    cout << alienOrder(words) << endl;\n    return 0;\n}",
+          "human_score": 100
+        },
+        {
+          "code": "#include <iostream>\n#include <vector>\n#include <unordered_map>\n#include <unordered_set>\n#include <string>\nusing namespace std;\n\nstring alienOrder(vector<string>& words){\n    // builds adjacency but does not handle cycles correctly\n    unordered_map<char, unordered_set<char>> adj;\n    for(int i=0;i<words.size()-1;i++){\n        string w1=words[i], w2=words[i+1];\n        int len=min(w1.size(), w2.size());\n        for(int j=0;j<len;j++){\n            if(w1[j]!=w2[j]){\n                adj[w1[j]].insert(w2[j]);\n                break;\n            }\n        }\n    }\n    string order;\n    for(auto &[c,s]: adj) order+=c;\n    return order;\n}\n\nint main(){ int n; cin>>n; vector<string> words(n); for(int i=0;i<n;i++) cin>>words[i]; cout<<alienOrder(words); return 0;}",
+          "human_score": 65
+        },
+        {
+          "code": "#include <iostream>\n#include <vector>\nusing namespace std;\nint main(){ int n; cin>>n; for(int i=0;i<n;i++){ string s; cin>>s; } cout<<\"\"; return 0; }",
+          "human_score": 20
+        }
+      ]
+    },
+
+    {
+      "id": 5,
+      "difficulty": "Very Hard",
+      "title": "Largest Palindrome Product",
+      "description": "Find the largest palindrome made from the product of two n-digit numbers. Since the result could be very large, you should return the largest palindrome mod 1337.",
+      "reference_solution": "#include <iostream>\n#include <string>\nusing namespace std;\n\nint largestPalindrome(int n) {\n    if(n == 1) return 9;\n    long long upper = pow(10, n) - 1;\n    long long lower = pow(10, n - 1);\n\n    for(long long left = upper; left >= lower; --left){\n        string s = to_string(left);\n        string rev = s;\n        reverse(rev.begin(), rev.end());\n        long long pal = stoll(s + rev);\n        for(long long i = upper; i >= lower; --i){\n            if(pal / i > upper) break;\n            if(pal % i == 0) return pal % 1337;\n        }\n    }\n    return 0;\n}\n\nint main(){\n    int n;\n    cin >> n;\n    cout << largestPalindrome(n) << endl;\n    return 0;\n}",
+      "rubric": [
+        {"criterion": "Compiles without errors", "points": 13},
+        {"criterion": "Correct palindrome generation", "points": 27},
+        {"criterion": "Correct handling of n-digit constraints", "points": 20},
+        {"criterion": "Efficient approach to avoid brute-force where possible", "points": 33},
+        {"criterion": "Proper input/output handling", "points": 7}
+      ],
+      "student_submissions": [
+        {
+          "code": "#include <iostream>\n#include <string>\n#include <algorithm>\nusing namespace std;\n\nint largestPalindrome(int n) {\n    if(n==1) return 9;\n    long long upper = pow(10,n)-1;\n    long long lower = pow(10,n-1);\n    for(long long left=upper; left>=lower; --left){\n        string s=to_string(left);\n        string rev=s;\n        reverse(rev.begin(),rev.end());\n        long long pal=stoll(s+rev);\n        for(long long i=upper;i>=lower;--i){\n            if(pal/i>upper) break;\n            if(pal%i==0) return pal%1337;\n        }\n    }\n    return 0;\n}\n\nint main(){ int n; cin>>n; cout<<largestPalindrome(n)<<endl; return 0; }",
+          "human_score": 100
+        },
+        {
+          "code": "#include <iostream>\nusing namespace std;\n\nint largestPalindrome(int n){\n    long long maxPal=0;\n    long long upper=pow(10,n)-1;\n    long long lower=pow(10,n-1);\n    for(long long i=upper;i>=lower;i--){\n        for(long long j=upper;j>=lower;j--){\n            long long prod=i*j;\n            string s=to_string(prod);\n            string rev=s;\n            reverse(rev.begin(),rev.end());\n            if(s==rev && prod>maxPal) maxPal=prod;\n        }\n    }\n    return maxPal%1337;\n}\n\nint main(){ int n; cin>>n; cout<<largestPalindrome(n); return 0; }",
+          "human_score": 75
+        },
+        {
+          "code": "#include <iostream>\nusing namespace std;\nint main(){ int n; cin>>n; cout<<0; return 0; }",
+          "human_score": 10
+        }
+      ]
+    }
+
+  ]
+}
+

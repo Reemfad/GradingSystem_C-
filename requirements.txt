@@ -1,0 +1,23 @@
+# Core LLM + Agents
+openai>=1.0.0
+langchain>=0.2.0
+langgraph>=0.0.40
+
+# Prompting & parsing
+pydantic>=2.0
+python-dotenv
+
+# Backend (UI support)
+fastapi
+uvicorn
+
+# UI 
+streamlit
+
+
+# Dev & testing
+pytest
+rich
+
+scikit-learn
+langchain-openai
