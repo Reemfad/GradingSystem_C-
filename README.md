@@ -1,6 +1,6 @@
 # 🤖 AI-Powered Automated Grading System for C++ Code
 
-![System Screenshot](assets/screenshot.png)
+
 
 ## 📋 Project Overview
 
