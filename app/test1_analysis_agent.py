@@ -28,7 +28,7 @@ def test_analysis_agent_produces_analysis_result():
     analysis = new_state.partial_results["analysis"]
     assert isinstance(analysis, AnalysisResult)
 
-    # ✅ Required fields must exist
+    
     assert isinstance(analysis.correct_components, list)
     assert isinstance(analysis.missing_components, list)
     assert isinstance(analysis.logical_errors, list)
